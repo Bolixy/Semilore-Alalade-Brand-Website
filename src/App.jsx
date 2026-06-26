@@ -228,6 +228,7 @@ const fadeUp = {
 const HomePage = () => {
   const [email, setEmail] = useState("");
   const [subscribeStatus, setSubscribeStatus] = useState("");
+  const [contactStatus, setContactStatus] = useState("");
 
   const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
@@ -253,6 +254,44 @@ const HomePage = () => {
     } catch (error) {
       console.log(error);
       setSubscribeStatus("error");
+    }
+  };
+  const [contactForm, setContactForm] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleContactChange = (e) => {
+    setContactForm({ ...contactForm, [e.target.name]: e.target.value });
+  };
+
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+
+    setContactStatus("sending");
+
+    try {
+      await emailjs.send(
+        "service_gyn2xju",
+        "template_fedcxqc", // ← your real template ID goes here
+        {
+          from_name: contactForm.name,
+          from_email: contactForm.email,
+          message: contactForm.message,
+        },
+        "gxQo3kj2x1cP5glF4",
+      );
+
+      setContactStatus("success");
+      setContactForm({ name: "", email: "", message: "" });
+
+      setTimeout(() => {
+        setContactStatus("");
+      }, 3000);
+    } catch (error) {
+      console.log(error);
+      setContactStatus("error");
     }
   };
   return (
@@ -578,8 +617,22 @@ const HomePage = () => {
             </div>
           </div>
           <form>
-            <input type="text" placeholder="Your Name" />
-            <input type="email" placeholder="Your Email" />
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              value={contactForm.name}
+              onChange={handleContactChange}
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              value={contactForm.email}
+              onChange={handleContactChange}
+              required
+            />
             <textarea
               rows="4"
               placeholder="Tell us about your event or organization"
