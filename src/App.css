@@ -1,13 +1,16 @@
 :root {
-  --bg: #f5f8ff;
+  --bg: #ffffff;
   --surface: #ffffff;
-  --surface-2: #eef4ff;
-  --text: #0f172a;
-  --muted: #5b6b8a;
-  --primary: #0f5bff;
-  --primary-dark: #0a42bf;
-  --border: #dde7ff;
-  --shadow: 0 24px 50px rgba(15, 91, 255, 0.08);
+  --surface-2: #f4f7fb;
+
+  --text: #111827;
+  --muted: #6b7280;
+
+  --primary: #0057ff;
+  --primary-dark: #003ecb;
+
+  --border: #e5e7eb;
+
   --radius: 22px;
 }
 
@@ -20,9 +23,13 @@
 html {
   scroll-behavior: smooth;
 }
-
+.app-shell {
+  background: var(--bg);
+  color: var(--text);
+}
 body {
   background: linear-gradient(180deg, #f7f9ff 0%, #eef5ff 100%);
+  overflow-x: hidden;
 }
 
 img {
@@ -44,7 +51,7 @@ img {
   align-items: center;
   justify-content: space-between;
   padding: 18px 36px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.95);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
@@ -183,19 +190,27 @@ nav a.active::after {
 }
 
 .hero {
+  position: relative;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 48px;
   padding: 72px 56px;
-  background:
-    radial-gradient(
-      circle at top left,
-      rgba(15, 91, 255, 0.08),
-      transparent 22%
-    ),
-    linear-gradient(90deg, #f9fbff 0%, #f4f8ff 100%);
+  background: #ffffff;
+  overflow: hidden;
 }
-
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: rgba(96, 165, 250, 0.15);
+  filter: blur(120px);
+  border-radius: 50%;
+  top: -100px;
+  right: -100px;
+  pointer-events: none;
+  z-index: 0;
+}
 .hero-content h1 {
   font-size: clamp(2.8rem, 4vw, 4.3rem);
   line-height: 1;
@@ -233,16 +248,25 @@ nav a.active::after {
 }
 
 .button.primary {
-  background: var(--primary);
-  color: #fff;
-  padding: 14px 22px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: blue;
+  color: white;
+  padding: 12px 18px;
 }
 
 .button.secondary {
-  background: #fff;
-  color: var(--text);
-  border: 1px solid var(--border);
-  padding: 14px 22px;
+  width: 280px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #0057ff;
+  color: #0057ff;
+  padding: 10px 15px;
+  font-size: 15px;
 }
 
 .hero-socials {
@@ -258,7 +282,7 @@ nav a.active::after {
   min-height: 520px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   background: #fff;
   border-radius: 30px;
   overflow: hidden;
@@ -282,17 +306,19 @@ nav a.active::after {
 }
 
 .visual-card {
+  width: 200px;
   position: absolute;
-  background-color: #fff;
+  background-color: white;
   border-radius: 18px;
   padding: 24px;
   box-shadow: 0 12px 30px rgba(15, 91, 255, 0.1);
 }
 
 .main-card {
-  width: 78%;
+  width: 60%;
   height: 420px;
   background: transparent;
+  padding-left: 10px;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -322,11 +348,19 @@ nav a.active::after {
 }
 
 .stats-strip {
+  background: #111827;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
   padding: 28px 56px;
   background: #fff;
+}
+.stats-strip strong {
+  color: #3b82f6;
+}
+
+.stats-strip span {
+  color: #d1d5db;
 }
 
 .stats-strip div {
@@ -431,7 +465,45 @@ nav a.active::after {
   border-radius: var(--radius);
   padding: 28px;
 }
+.testimonial-grid blockquote {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
 
+.testimonial-grid blockquote footer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.testimonial-avatar {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--border);
+}
+
+.testimonial-avatar img {
+  object-fit: cover;
+}
+
+.testimonial-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.testimonial-meta strong {
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.testimonial-meta span {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
 .conference-card {
   overflow: hidden;
   padding: 0;
@@ -684,8 +756,8 @@ nav a.active::after {
 }
 
 .newsletter {
+  background: #111827;
   margin: 0 56px 84px;
-  background: linear-gradient(90deg, #0f5bff, #2d7bff);
   border-radius: 28px;
   padding: 48px;
   color: #fff;
@@ -755,11 +827,14 @@ nav a.active::after {
 }
 
 .contact-card {
-  background: linear-gradient(180deg, #eff5ff, #f9fbff);
+  background: #111827;
+  color: white;
   border-radius: 26px;
   padding: 42px;
 }
-
+.contact-card p {
+  color: #d1d5db;
+}
 .contact-form-card {
   background: #fff;
   border: 1px solid var(--border);
@@ -938,6 +1013,7 @@ nav a.active::after {
   .conference-grid,
   .testimonials-grid {
     grid-template-columns: 1fr;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
   }
 
   .guidelines-grid {
@@ -948,7 +1024,6 @@ nav a.active::after {
     grid-template-columns: 1fr;
   }
 }
-
 @media (max-width: 768px) {
   .app-shell {
     width: 100%;
@@ -1048,18 +1123,30 @@ nav a.active::after {
     flex-direction: column;
   }
 
+  .hero-actions .button.primary,
+  .hero-actions .button.secondary {
+    width: 100%;
+  }
+
   .hero-visual {
     min-height: 420px;
+    overflow: hidden;
   }
 
   .main-card {
-    width: 88%;
-    height: 340px;
+    top: 200px;
+    width: 60%;
+    height: 200px;
+    padding: 20px;
+    background-color: transparent;
   }
 
   .floating-card {
-    right: 0;
-    bottom: 0;
+    width: 150px;
+    right: 10px;
+    bottom: 10px;
+    max-width: 140px;
+    font-size: 0.75rem;
   }
 
   .stats-strip,

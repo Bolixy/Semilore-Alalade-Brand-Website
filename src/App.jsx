@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState } from "react";
 import { Link, NavLink, Route, Routes } from "react-router-dom";
+import { inView, motion } from "framer-motion";
 import { HashLink } from "react-router-hash-link";
 import {
   FaInstagram,
@@ -10,7 +11,7 @@ import {
   FaTimes,
 } from "react-icons/fa";
 import emailjs from "@emailjs/browser";
-import wealthachemist from "./assets/wealthachemist.jpg";
+import semilorelogo from "./assets/semilorelogo.jpg";
 import background1 from "./assets/background1.png";
 import background2 from "./assets/background2.png";
 import SemiloreHeadshot from "./assets/SemiloreHeadshot.png";
@@ -27,12 +28,18 @@ import test3 from "./assets/test3.png";
 import test4 from "./assets/test4.png";
 import test5 from "./assets/test5.png";
 import cert from "./assets/cert.png";
+import ilesanmimichael from "./assets/ilesanmimichael.jpg";
+import justHim from "./assets/justHim.png";
+import oluwakamiye from "./assets/oluwakamiye.jpg";
+import samayomide from "./assets/samayomide.jpg";
+import samuelNyalogwue from "./assets/samuelNyalogwue.jpg";
+
 import { BrowserRouter } from "react-router-dom";
 
 const stats = [
-  { value: "15+", label: "Years of Impact" },
-  { value: "300+", label: "Speaking Events" },
-  { value: "50K", label: "Lives Touched" },
+  { value: "3+", label: "Years of Impact" },
+  { value: "50+", label: "Speaking Events" },
+  { value: "10K", label: "Lives Touched" },
 ];
 
 const highlights = [
@@ -53,68 +60,82 @@ const highlights = [
 const testimonials = [
   {
     quote:
-      "Tonight was a power-packed session. You dished out value after value.",
+      "Tonight was a power-packed session. You dished out value after value. Mindset is not fixed, It can learn, unlearn, and relearn. If you cannot change the internal you , you cannot change your result",
     name: "Samuel Nyalongwe",
     role: "Participant",
-    image: test1,
+    image: samuelNyalogwue,
   },
   {
     quote:
-      "Today's class was amazing, inspiring, and wonderful. I learned a lot and discovered questions to reflect on.",
+      "Today's class was amazing, inspiring, and wonderful. I learned a lot and discovered questions to reflect on. From mindset to growth, awareness, and consistency.",
     name: "Irradatullahi",
     role: "Participant",
-    image: test2,
+    image: justHim,
   },
   {
     quote:
-      "It was a really impactful enlightenment session that brings clarity and the reality of life.",
+      "It was a really impactful enlightenment session that brings clarity and the reality of life. I learned what defines mindset is something we build intentionally",
     name: "Samuel Ayomide",
     role: "Participant",
-    image: test3,
+    image: samayomide,
   },
   {
     quote:
-      "It was an amazing one. So much knowledge was shared on finding problems your skills can solve.",
+      "It was an amazing one. So much knowledge was shared on finding problems your skills can solve. positioning those skills, knowing your target audience, and creating an offer ",
     name: "Odubote Sola",
     role: "Participant",
     image: test4,
+  },
+  {
+    quote:
+      "Purpose discovery is the bedrock of wealth creation. I learnt that mindset is the lens through which we see the world — if you limit yourself in your mind, you've limited yourself in life. Your mindset is a mirror of who you are, and purpose isn't discovered suddenly, it's found through reflection and experience.",
+    name: "Oluwakamiye",
+    role: "Participant",
+    image: oluwakamiye,
+  },
+  {
+    quote:
+      "Thank you so much for tonight's session, it was nothing short of premium value. The basis of what I learnt is that a person's mindset basically determines their life — their actions, thoughts, results, relationships, and environment. A person's beliefs are the building block of their mindset. ",
+    name: "Ilesanmi Michael",
+    role: "Participant",
+    image: ilesanmimichael,
   },
 ];
 
 const conferences = [
   {
     title: "Game Changer Conference, Osun State University - Media 1",
-    date: "November 2024",
+    date: "January 2026",
     location: "Osun, Nigeria",
     image: conference1,
   },
   {
     title: "Game Changer Conference, Osun State University - Media 2",
-    date: "November 2024",
+    date: "January 2026",
     location: "Osun, Nigeria",
     image: conference3,
   },
   {
     title: "Game Changer Conference, Osun State University - Media 3",
-    date: "November 2024",
+    date: "January 2026",
     location: "Osun, Nigeria",
     image: conference2,
   },
   {
     title: "Game Changer Conference, Osun State University - Award",
-    date: "November 2024",
+    date: "January 2026",
     location: "Osun, Nigeria",
     image: award2,
   },
   {
     title: "Game Changer Conference, Osun State University - Award",
-    date: "November 2024",
+    date: "January 2026",
     location: "Osun, Nigeria",
     image: award1,
   },
   {
     title: "Game Changer Conference, Osun State University - Red Carpet",
-    date: "November 2024",
+    date: "January 2026",
     location: "Osun, Nigeria",
     image: aftercon2,
   },
@@ -128,7 +149,7 @@ const SiteHeader = () => {
       <Link className="brand" to="/">
         <img
           className="brand-logo"
-          src={wealthachemist}
+          src={semilorelogo}
           alt="Wealthachemist logo"
         />
         <span className="brand-name">Semilore Alalade</span>
@@ -155,6 +176,7 @@ const SiteHeader = () => {
       <a href="#subscribe" className="nav-button">
         Book Speaker
       </a>
+
       <button className="menu-button" onClick={() => setIsOpen(!isOpen)}>
         <FaBars />
       </button>
@@ -193,7 +215,16 @@ const SiteHeader = () => {
     </header>
   );
 };
-
+const fadeUp = {
+  hidden: {
+    opacity: 0,
+    y: 60,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+  },
+};
 const HomePage = () => {
   const [email, setEmail] = useState("");
   const [subscribeStatus, setSubscribeStatus] = useState("");
@@ -227,7 +258,12 @@ const HomePage = () => {
   return (
     <main>
       <section className="hero" id="home">
-        <div className="hero-content">
+        <motion.div
+          className="hero-content"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.0 }}
+        >
           <span className="eyebrow">
             Purpose Discovery & Clarity Strategist
           </span>
@@ -240,44 +276,74 @@ const HomePage = () => {
             confidence.
           </p>
           <div className="hero-actions">
-            <a className="button primary" href="#contact">
-              Speak With Semilore
-            </a>
-            <a className="button secondary" href="#testimonials">
+            <motion.a
+              className="button primary"
+              href="#contact"
+              whileHover={{
+                scale: 1.05,
+              }}
+              whileTap={{
+                scale: 0.95,
+              }}
+            >
+              Speak with Semilore
+            </motion.a>
+            <motion.a
+              className="button secondary"
+              href="#testimonials"
+              whileHover={{
+                scale: 1.05,
+              }}
+              whileTap={{
+                scale: 0.95,
+              }}
+            >
               Hear What Others Say
-            </a>
+            </motion.a>
           </div>
 
           <div className="hero-socials">
             <a
-              href="https://www.linkedin.com/in/semilorealalade"
+              href="https://www.linkedin.com/in/semilore-alalade-the-wealth-alchemist-39a643278?utm_source=share_via&utm_content=profile&utm_medium=member_android"
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaLinkedin />
             </a>
             <a
-              href="https://www.instagram.com/semilorealalade"
+              href="https://www.instagram.com/alaladesemilore?igsh=MXhhdjM0enhnbmJodw=="
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaInstagram />
             </a>
             <a
-              href="https://wa.me/1234567890"
+              href="https://wa.link/bae2ra"
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaWhatsapp />
             </a>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="hero-visual">
-          <img
+        <motion.div
+          className="hero-visual"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <motion.img
             className="hero-image"
             src={SemiloreHeadshot}
-            alt="Semilore Alalade headshot"
+            alt="Semilore"
+            animate={{
+              y: [0, -15, 0],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+            }}
           />
           <div className="visual-card main-card">
             <div className="visual-badge">Featured Speaker</div>
@@ -289,7 +355,7 @@ const HomePage = () => {
             <strong>Corporate Events</strong>
             <strong>Leadership Retreats</strong>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <section className="stats-strip">
@@ -301,9 +367,17 @@ const HomePage = () => {
         ))}
       </section>
 
-      <section className="about" id="about">
+      <motion.section
+        className="about"
+        id="about"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="about-image">
-          <img src={background2} alt="Semilore speaking with an audience" />
+          <img src={background1} alt="Semilore speaking with an audience" />
           <div className="about-quote">
             Your clarity is not a luxury,It is your launchpad.
           </div>
@@ -326,9 +400,17 @@ const HomePage = () => {
             Learn more about him →
           </Link>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="impact" id="impact">
+      <motion.section
+        className="impact"
+        id="impact"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="section-heading">
           <span className="eyebrow">What I Do</span>
           <h2>Purpose-led work that creates lasting change.</h2>
@@ -341,16 +423,34 @@ const HomePage = () => {
             </article>
           ))}
         </div>
-      </section>
+      </motion.section>
 
-      <section className="conferences" id="conferences">
+      <motion.section
+        className="conferences"
+        id="conferences"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="section-heading">
           <span className="eyebrow">Past Conferences</span>
           <h2>Moments of impact, reflection, and transformation.</h2>
         </div>
         <div className="conference-grid">
           {conferences.map((item) => (
-            <article className="conference-card" key={item.title}>
+            <article
+              className="conference-card"
+              key={item.title}
+              whileHover={{
+                y: -10,
+                scale: 1.03,
+              }}
+              transition={{
+                duration: 0.3,
+              }}
+            >
               <img src={item.image} alt={item.title} />
               <div>
                 <span>{item.date}</span>
@@ -364,27 +464,57 @@ const HomePage = () => {
             View all conference highlights
           </Link>
         </div>
-      </section>
-
-      <section className="testimonials" id="testimonials">
+      </motion.section>
+      <motion.section
+        className="testimonials"
+        id="testimonials"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="section-heading">
           <span className="eyebrow">Testimonials</span>
           <h2>What audiences and partners say.</h2>
         </div>
         <div className="testimonial-grid">
           {testimonials.map((item) => (
-            <blockquote key={item.name}>
-              <p>“{item.quote}”</p>
+            <motion.blockquote
+              key={item.name}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              whileHover={{
+                y: -10,
+                scale: 1.02,
+              }}
+            >
+              <p>"{item.quote}"</p>
               <footer>
-                <strong>{item.name}</strong> <br />
-                <span>{item.role}</span>
+                <div className="testimonial-avatar">
+                  <img src={item.image} alt={item.name} />
+                </div>
+                <div className="testimonial-meta">
+                  <strong>{item.name}</strong>
+                  <span>{item.role}</span>
+                </div>
               </footer>
-            </blockquote>
+            </motion.blockquote>
           ))}
         </div>
-      </section>
+      </motion.section>
 
-      <section className="newsletter" id="subscribe">
+      <motion.section
+        className="newsletter"
+        id="subscribe"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
         <div>
           <span className="eyebrow">Stay Connected</span>
           <h2>Subscribe for updates, insights, and speaking invitations.</h2>
@@ -403,7 +533,7 @@ const HomePage = () => {
         </form>
         {subscribeStatus === "success" && (
           <div className="status-message success">
-            ✓ Thank you for subscribing to semilore alalade newsletter!
+            ✓ Thank you for subscribing to semilore alalade!
           </div>
         )}
         {subscribeStatus === "error" && (
@@ -411,9 +541,17 @@ const HomePage = () => {
             Error. Please try again later.
           </div>
         )}
-      </section>
+      </motion.section>
 
-      <section className="contact" id="contact">
+      <motion.section
+        className="contact"
+        id="contact"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="contact-card">
           <span className="eyebrow">Let's Work Together</span>
           <h2>Book Semilore for your next event.</h2>
@@ -449,20 +587,26 @@ const HomePage = () => {
             <button type="submit">Send Inquiry</button>
           </form>
         </div>
-      </section>
+      </motion.section>
     </main>
   );
 };
 
 const AboutPage = () => (
   <main className="page-content">
-    <section className="page-hero">
+    <motion.section
+      className="page-hero"
+      variants={fadeUp}
+      initial="hidden"
+      animate="visible"
+      transition={{ duration: 0.8 }}
+    >
       <div>
         <span className="eyebrow">About</span>
         <h1>Purpose is not a destination — it is a way of living.</h1>
       </div>
-      <img src={background1} alt="Semilore speaking to an audience" />
-    </section>
+      <img src={background2} alt="Semilore speaking to an audience" />
+    </motion.section>
 
     <section className="page-section">
       <div className="page-text-block">
@@ -492,7 +636,13 @@ const AboutPage = () => (
       </div>
     </section>
 
-    <section className="page-section social-proof">
+    <motion.section
+      className="page-section social-proof"
+      variants={fadeUp}
+      initial="hidden"
+      animate="visible"
+      transition={{ duration: 0.8 }}
+    >
       <div className="section-heading">
         <span className="eyebrow">Recognition & Impact</span>
         <h2>Speaking proof and certifications</h2>
@@ -502,9 +652,15 @@ const AboutPage = () => (
         src={cert}
         alt="Certificate of Appreciation from Osun State University"
       />
-    </section>
+    </motion.section>
 
-    <section className="page-section testimonials-showcase">
+    <motion.section
+      className="page-section testimonials-showcase"
+      variants={fadeUp}
+      initial="hidden"
+      animate="visible"
+      transition={{ duration: 0.8 }}
+    >
       <div className="section-heading">
         <span className="eyebrow">Student & Participant Feedback</span>
         <h2>Transformational moments from real participants</h2>
@@ -520,7 +676,7 @@ const AboutPage = () => (
           </div>
         ))}
       </div>
-    </section>
+    </motion.section>
   </main>
 );
 
@@ -575,14 +731,26 @@ const bookingGuidelines = [
 
 const ConferencesPage = () => (
   <main className="page-content">
-    <section className="page-hero page-hero-small">
+    <motion.section
+      className="page-hero page-hero-small"
+      variants={fadeUp}
+      initial="hidden"
+      animate="visible"
+      transition={{ duration: 0.8 }}
+    >
       <div>
         <span className="eyebrow">Conferences & Speaking</span>
         <h1>Speaking engagements that challenge, equip, and transform.</h1>
       </div>
-    </section>
+    </motion.section>
 
-    <section className="page-section conference-page-grid">
+    <motion.section
+      className="page-section conference-page-grid"
+      variants={fadeUp}
+      initial="hidden"
+      animate="visible"
+      transition={{ duration: 0.8 }}
+    >
       {conferences.map((item) => (
         <article className="conference-detail-card" key={item.title}>
           <img src={item.image} alt={item.title} />
@@ -593,9 +761,15 @@ const ConferencesPage = () => (
           </div>
         </article>
       ))}
-    </section>
+    </motion.section>
 
-    <section className="page-section booking-info">
+    <motion.section
+      className="page-section booking-info"
+      variants={fadeUp}
+      initial="hidden"
+      animate="visible"
+      transition={{ duration: 0.8 }}
+    >
       <div className="section-heading">
         <span className="eyebrow">Before You Invite</span>
         <h2>What to Know Before Booking Semilore Alalade</h2>
@@ -613,9 +787,15 @@ const ConferencesPage = () => (
           </article>
         ))}
       </div>
-    </section>
+    </motion.section>
 
-    <section className="page-section speaking-topics">
+    <motion.section
+      className="page-section speaking-topics"
+      variants={fadeUp}
+      initial="hidden"
+      animate="visible"
+      transition={{ duration: 0.8 }}
+    >
       <div className="section-heading">
         <span className="eyebrow">Book a Speaker</span>
         <h2>Speaking Topics & Engagements</h2>
@@ -633,9 +813,15 @@ const ConferencesPage = () => (
           ))}
         </ul>
       </div>
-    </section>
+    </motion.section>
 
-    <section className="page-section brand-statement">
+    <motion.section
+      className="page-section brand-statement"
+      variants={fadeUp}
+      initial="hidden"
+      animate="visible"
+      transition={{ duration: 0.8 }}
+    >
       <div className="statement-card">
         <span className="eyebrow">Our Mission</span>
         <h2>Final Brand Statement</h2>
@@ -657,9 +843,9 @@ const ConferencesPage = () => (
           </p>
         </div>
       </div>
-    </section>
+    </motion.section>
 
-    <section className="contact-cta">
+    <motion.section className="contact-cta">
       <h2>Ready to Book?</h2>
       <p>
         For all enquiries and formal invitations, kindly reach out through the
@@ -668,7 +854,7 @@ const ConferencesPage = () => (
       <a href="/#contact" className="button primary">
         Send Speaking Inquiry
       </a>
-    </section>
+    </motion.section>
   </main>
 );
 
