@@ -237,12 +237,12 @@ const HomePage = () => {
 
     try {
       await emailjs.send(
-        "service_nf53csj",
+        "service_3bejupb",
         "template_fedcxqc",
         {
           subscriber_email: email,
         },
-        "t8HvykFsioQ0LBT6j",
+        "NTtvN982ewTsFvt_A",
       );
 
       setSubscribeStatus("success");
@@ -273,14 +273,14 @@ const HomePage = () => {
 
     try {
       await emailjs.send(
-        "service_gyn2xju",
+        "service_3bejupb",
         "template_fedcxqc", // ← your real template ID goes here
         {
           from_name: contactForm.name,
           from_email: contactForm.email,
           message: contactForm.message,
         },
-        "gxQo3kj2x1cP5glF4",
+        "NTtvN982ewTsFvt_A",
       );
 
       setContactStatus("success");
@@ -616,7 +616,7 @@ const HomePage = () => {
               <a href="tel:+2348000000000">+2349044504735</a>
             </div>
           </div>
-          <form>
+          <form onSubmit={handleContactSubmit}>
             <input
               type="text"
               name="name"
@@ -635,10 +635,26 @@ const HomePage = () => {
             />
             <textarea
               rows="4"
+              name="message"
               placeholder="Tell us about your event or organization"
+              value={contactForm.message}
+              onChange={handleContactChange}
+              required
             ></textarea>
-            <button type="submit">Send Inquiry</button>
+            <button type="submit" disabled={contactStatus === "sending"}>
+              {contactStatus === "sending" ? "Sending..." : "Send Inquiry"}
+            </button>
           </form>
+          {contactStatus === "success" && (
+            <div className="status-message success">
+              ✓ Thank you! Your message has been sent.
+            </div>
+          )}
+          {contactStatus === "error" && (
+            <div className="status-message error">
+              Error sending message. Please try again later.
+            </div>
+          )}
         </div>
       </motion.section>
     </main>
