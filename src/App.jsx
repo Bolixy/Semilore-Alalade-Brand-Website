@@ -65,13 +65,7 @@ const testimonials = [
     role: "Participant",
     image: samuelNyalogwue,
   },
-  {
-    quote:
-      "Today's class was amazing, inspiring, and wonderful. I learned a lot and discovered questions to reflect on. From mindset to growth, awareness, and consistency.",
-    name: "Irradatullahi",
-    role: "Participant",
-    image: justHim,
-  },
+
   {
     quote:
       "It was a really impactful enlightenment session that brings clarity and the reality of life. I learned what defines mindset is something we build intentionally",
@@ -79,13 +73,7 @@ const testimonials = [
     role: "Participant",
     image: samayomide,
   },
-  {
-    quote:
-      "It was an amazing one. So much knowledge was shared on finding problems your skills can solve. positioning those skills, knowing your target audience, and creating an offer ",
-    name: "Odubote Sola",
-    role: "Participant",
-    image: test4,
-  },
+
   {
     quote:
       "Purpose discovery is the bedrock of wealth creation. I learnt that mindset is the lens through which we see the world — if you limit yourself in your mind, you've limited yourself in life. Your mindset is a mirror of who you are, and purpose isn't discovered suddenly, it's found through reflection and experience.",
