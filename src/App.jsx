@@ -261,14 +261,14 @@ const HomePage = () => {
 
     try {
       await emailjs.send(
-        "service_3bejupb",
-        "template_fedcxqc", // ← your real template ID goes here
+        "service_4r80qt8",
+        "template_qvg7c4g", // ← your real template ID goes here
         {
           from_name: contactForm.name,
           from_email: contactForm.email,
           message: contactForm.message,
         },
-        "NTtvN982ewTsFvt_A",
+        "UnuBDcnK7wW_4YaJt",
       );
 
       setContactStatus("success");
